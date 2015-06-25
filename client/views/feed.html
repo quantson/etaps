@@ -1,0 +1,29 @@
+<template name="feed">
+	{{> feedAddNew}}
+	<!-- {{> cards}} -->
+</template>
+
+<template name="feedAddNew">
+	<div class="row feed-add-new">
+		<div class="col-md-4">
+			<a href="#">
+				<span class="feed-add-new_small">Create new</span>
+				<span class="feed-add-new_big">collection</span>
+				<img src="/collections.svg">
+			</a>
+		</div>
+		<div class="col-md-4">
+			<a href="#">
+				<span class="feed-add-new_small">Create new</span>
+				<span class="feed-add-new_big">journey</span>
+				<img src="/journeys.svg">
+			</a>
+		</div>
+		<div class="col-md-4">
+			<a href="#">
+				<span class="feed-add-new_big" id="pin">pin</span>
+				<img src="/pin.png">
+			</a>
+		</div>
+	</div>
+</template>

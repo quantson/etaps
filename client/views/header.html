@@ -1,5 +1,5 @@
 <template name="header">
-	<nav class="navbar navbar-default row">
+	<nav class="navbar navbar-default row" role="navigation">
 		<div class="navbar-header col-md-3">
 			<ul class="nav navbar-nav">
 				<li>
@@ -14,5 +14,10 @@
 			</ul>
 		</div>
 		<a class="navbar-brand col-md-2 col-md-offset-2" href="{{pathFor 'home'}}"><img src="/etaps.png" alt="etaps"></a>
+		<div class="navbar-collapse collapse">
+	        <ul class="nav navbar-nav navbar-right">
+	            {{> loginButtons}}
+	        </ul>
+    	</div>
 	</nav>
 </template>
