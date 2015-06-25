@@ -10,6 +10,7 @@ Template.map.helpers({
 		          style: google.maps.ZoomControlStyle.SMALL,
 		          position: google.maps.ControlPosition.RIGHT_TOP
 		        },
+		        minZoom: 2
 			};
 		}
 	}
