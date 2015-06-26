@@ -1,6 +1,18 @@
 <template name="feed">
-	{{> feedAddNew}}
-	<!-- {{> cards}} -->
+	<div class="feed-wrapper">
+		{{> feedAddNew}}
+		<div class="cards">
+			<div class="card">
+				{{> card}}
+			</div>
+			<div class="card">
+				{{> card}}
+			</div>
+			<div class="card">
+				{{> card}}
+			</div>
+		</div>
+	</div>	
 </template>
 
 <template name="feedAddNew">
