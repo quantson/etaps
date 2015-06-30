@@ -48,7 +48,7 @@ Template.map.onCreated(function () {
 		      animation: google.maps.Animation.DROP,
 		      position: new google.maps.LatLng(document.lat, document.lng),
 		      map: map,
-		      icon: 'pin_small.png',
+		      icon: '/pin_small.png',
 		      // We store the document _id on the marker in order 
 		      // to update the document within the 'dragend' event below.
 		      id: document._id
@@ -113,7 +113,7 @@ Template.map.onCreated(function () {
 					}, 500);
 
 		    	//route to cardCreate
-		    	setTimeout(function () {Router.go('new_etap');}, 100);
+		    	Router.go('new_etap');
 
 		  	});
 		  	
@@ -123,21 +123,6 @@ Template.map.onCreated(function () {
 	});
 
 });
-
-
-function placeMarker (position, map) {
-
-	var marker = new google.maps.Marker({
-		position: position,
-		map: map,
-		animation: google.maps.Animation.DROP,
-		icon: 'pin_small.png',
-	  draggable: true,
-	});
-
-
-	return marker;
-}
 
 getNewCenter = function (map) {
 	var bounds = map.getBounds(),
