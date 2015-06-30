@@ -3,5 +3,21 @@ Router.configure({
 });
 
 Router.route('/', {
-	name: 'home'
+	name: 'home',
+	yieldRegions: {
+		'feedAddNew': {to: 'feedTop'}
+	},
+	waitOn : function() {
+		return Meteor.subscribe('markers');
+	}
+});
+
+Router.route('/etaps/new', {
+	name: 'new_etap',
+	yieldRegions: {
+		'cardCreate': {to: 'feedTop'}
+	},
+	waitOn : function() {
+		return Meteor.subscribe('markers');
+	}
 });

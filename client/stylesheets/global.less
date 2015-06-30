@@ -56,14 +56,14 @@ html, body{
   min-width: 400px;
   height: 100%;
   position: absolute;
-	/*padding-top: @header;*/
 	top: 0;
   background: rgba(0,0,0,0.2);
 }
 
 .feed-wrapper{
 	margin-top: @header;
- 	overflow: auto;
+ 	overflow-y: auto;
+ 	overflow-x: hidden; 
  	position: absolute;
  	top: 0;
  	bottom: 0;
@@ -73,13 +73,17 @@ html, body{
  	}
 }
 
-
-.feed-add-new {
+.feed-template{
 	background: white;
-	margin: 10px 2%;
 	border-radius: 2px;
   box-shadow: @shadow;
-	
+  margin: 10px 2% 10px 1%;
+  width: 97%;
+}
+
+.feed-add-new {
+	.feed-template;
+
 	div{
 		padding: 0 10px;
 	}
@@ -127,6 +131,36 @@ html, body{
 	}
 }
 
+.card-create {
+	.feed-template;
+	position: relative;
+	
+	*{
+		font-size: 12px;
+		border-radius: 2px;
+	}
+
+	.card-create_title{
+		text-align: center;
+		font-weight: bold;
+		font-size: 14px;
+		margin: 5px 0 10px 0;
+	}
+	
+	.cancel {
+		position: absolute;
+		top: 5px;
+		right: 10px;
+		cursor: pointer;
+		font-size: 14px;
+	}
+
+	.form-control{
+		padding: 3px 6px;
+		height: 25px;
+	}
+}
+
 .cards{
 	margin: 0;
 	width: 100%;
@@ -138,10 +172,8 @@ html, body{
 
 .card{
 	display: inline-block;
+	.feed-template;
 	width: 47%;
-	background: white;
-	border-radius: 2px;
-  box-shadow: @shadow;
 	margin: 10px 0 10px 2%;
 	font-size: 11px;
 	

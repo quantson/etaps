@@ -1,6 +1,6 @@
 <template name="feed">
 	<div class="feed-wrapper">
-		{{> feedAddNew}}
+		{{> yield 'feedTop'}}
 		<div class="cards">
 			<div class="card">
 				{{> card}}

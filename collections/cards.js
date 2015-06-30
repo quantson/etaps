@@ -20,3 +20,17 @@ Meteor.methods({
 		};
 	}
 });
+
+validateCard = function (card) {
+  var errors = {};
+
+  if (!card.title)
+    errors.title = "Please fill in a headline";
+  
+  if (card.location === 'custom')
+    errors.customLoc =  "Please fill in a custom location";
+
+  //todo: add error for customLoc
+
+  return errors;
+};

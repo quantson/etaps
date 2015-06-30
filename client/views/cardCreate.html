@@ -1,0 +1,67 @@
+<template name="cardCreate">
+  <div class="card-create">
+    <form class="form-horizontal">
+      <fieldset>
+
+        <div class="card-create_title">Add new etap</div>
+        <div class="cancel">&times;</div>
+
+        <!-- Title-->
+        <div class="form-group {{errorClass 'title'}}">
+          <label class="col-md-4 control-label" for="title">Etap title</label>  
+          <div class="col-md-7">
+          <input name="title" type="text" placeholder="ex: Chilling in Chile" class="form-control input-md">
+          <span class="help-block">{{errorMessage 'title'}}</span>  
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="location">Location</label>
+          <div class="col-md-7">
+            <select name="location" class="form-control location">
+              <option disabled selected>Select a location</option>
+              {{#each locations}}
+                <option value="{{this}}">{{this}}</option>
+              {{/each}}
+              <option id="customLoc" value="custom">Custom location</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Custom Location-->
+        <div class="form-group customLocDiv {{errorClass 'customLoc'}}" style="{display:none}">
+          <label class="col-md-4 control-label" for="customLoc">Custom location</label>  
+          <div class="col-md-7">
+          <input id="customLoc" name="customLoc" type="text" placeholder="ex: Parque Nacional Torres del Paine" class="form-control input-md">
+          <span class="help-block">{{errorMessage 'customLoc'}}</span>  
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="description">Description</label>
+          <div class="col-md-7">                     
+            <textarea class="form-control" name="description"></textarea>
+          </div>
+        </div>
+
+        <!-- File upload --> 
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="file">Upload image</label>
+          <div class="col-md-7">
+            <input name="file" class="input-file" type="file">
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <div class="col-md-4 pull-right">
+            <input type="submit" name="submit" class="btn btn-success" value="Add etap !">
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div> 
+</template>
