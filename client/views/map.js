@@ -55,8 +55,10 @@ Template.map.onCreated(function () {
 		    });
 
 		    // This listener lets us drag markers on the map and update their corresponding document.
-		    google.maps.event.addListener(marker, 'dragend', function(event) {
-		      Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
+		    google.maps.event.addListener(marker, 'dragend', function(e) {
+		    	reverseGeocode(e.latLng, function (locations) {
+			      Markers.update(marker.id, { $set: { lat: e.latLng.lat(), lng: e.latLng.lng(), reverse_geo: locations }});
+		    	});
 		    });
 
 		    // Store this marker instance within the markers object.
@@ -84,20 +86,10 @@ Template.map.onCreated(function () {
     		var position = e.latLng;
 
 	    	//get location names in an array
-		    var locations = [];
-
-	    	var geocoder = new google.maps.Geocoder();
-	    	geocoder.geocode({'location': position}, function(results, status) {
-			    if (status == google.maps.GeocoderStatus.OK) {
-			      if (results) {
-			      	_.each(results, function (result) {
-			      		locations.push(result.formatted_address);
-			      	});
-			      } 
-			    }
+		    reverseGeocode(position, function (locations) {
 
 		    	//add pin with location
-		    	Markers.insert({ lat: position.lat(), lng: position.lng(), reverse_geo: locations });
+		    	Markers.insert({ lat: position.lat(), lng: position.lng(), reverse_geo: locations, type: 'addNew' });
 					
 					//get the map to pan so the pin in the new center
 					var bounds = map.getBounds(),
@@ -114,7 +106,6 @@ Template.map.onCreated(function () {
 
 		    	//route to cardCreate
 		    	Router.go('new_etap');
-
 		  	});
 		  	
 		  }	
@@ -132,3 +123,22 @@ getNewCenter = function (map) {
 		newLng = sw.lng() + 0.66*widthLng;
 		return new google.maps.LatLng(map.getCenter().lat(), newLng);
 };
+
+//return a callback function with argument an array of geo-names of the position
+reverseGeocode = function (position, callback) {
+	
+	var locations = [];
+
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'location': position}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results) {
+      	_.each(results, function (result) {
+      		locations.push(result.formatted_address);
+      	});
+      } 
+    }
+
+    callback(locations);
+	});
+};	

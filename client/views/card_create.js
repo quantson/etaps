@@ -16,7 +16,6 @@ Template.cardCreate.helpers({
 
 Template.cardCreate.events({
   'change .location': function (e) {
-    console.log($(e.target).val());
     if ($(e.target).val() === 'custom')
       $('.customLocDiv').show();
     else
@@ -48,14 +47,10 @@ Template.cardCreate.events({
       
       // Router.go('postPage', {_id: result._id});  
     });
-  },
-
-  'click .cancel': function (e) {
-    e.preventDefault();
-    if (Markers.findOne()) {
-      var markerId = Markers.findOne()._id;
-      Markers.remove({ _id: markerId });
-    }
-    Router.go('home');
   }
+
+});
+
+Template.cardCreate.onDestroyed( function () {
+  Meteor.call('removeMarker');
 });
