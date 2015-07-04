@@ -15,9 +15,15 @@
 		</div>
 		<a class="navbar-brand col-md-2 col-md-offset-2" href="{{pathFor 'home'}}"><img src="/etaps.png" alt="etaps"></a>
 		<div class="navbar-collapse collapse">
-	        <ul class="nav navbar-nav navbar-right">
-	            {{> loginButtons}}
-	        </ul>
-    	</div>
+      <ul class="nav navbar-nav navbar-right">
+				{{#unless currentUser}}
+          {{> loginButtons}}
+		    {{else}}
+		    	<li class="dropdown">
+            {{> notifications}}
+          </li>
+		    {{/unless}}  
+      </ul>
+  	</div>
 	</nav>
 </template>

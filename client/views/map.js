@@ -37,9 +37,19 @@ Template.map.onCreated(function () {
 			newCenter = getNewCenter(map);
 		});
 
-		//dburles reactive markers code
+		//initialize global marker list in object
 		markers = {};
 
+		//initialize new Etap marker function
+		Tracker.autorun(function () {
+			//only pin if current path is newEtap
+			if (Router.current().route.path(this) === '/etaps/new') {
+				console.log('in');
+				pinNewEtap(map);
+			}
+		});
+			
+		//dburles reactive markers code
 		Markers.find().observe({  
 		  added: function(document) {
 		    // Create a marker for this document
@@ -89,7 +99,7 @@ Template.map.onCreated(function () {
 		    reverseGeocode(position, function (locations) {
 
 		    	//add pin with location
-		    	Markers.insert({ lat: position.lat(), lng: position.lng(), reverse_geo: locations, type: 'addNew' });
+		    	Session.set('newMarker', {lat: position.lat(), lng: position.lng(), reverse_geo: locations, id: new Mongo.ObjectID()._str});
 					
 					//get the map to pan so the pin in the new center
 					var bounds = map.getBounds(),
@@ -141,4 +151,41 @@ reverseGeocode = function (position, callback) {
 
     callback(locations);
 	});
+};
+
+pinNewEtap = function (map) {
+	var markerEl = Session.get('newMarker');
+  if (markerEl && !markerEl.changed) {
+	  var marker = new google.maps.Marker({
+	    draggable: true,
+	    animation: google.maps.Animation.DROP,
+	    position: new google.maps.LatLng(markerEl.lat, markerEl.lng),
+	    map: map,
+	    icon: '/pin_small.png'
+	  });
+
+	  // This listener lets us drag markers on the map and update their corresponding document.
+	  google.maps.event.addListener(marker, 'dragend', function(e) {
+	  	reverseGeocode(e.latLng, function (locations) {
+	      Session.set('newMarker', { lat: e.latLng.lat(), lng: e.latLng.lng(), reverse_geo: locations, id: markerEl.id, changed: true });
+	  	});
+	  });
+
+	  markers[markerEl.id] = marker;
+
+	} 
 };	
+
+unpin = function (markerId) {
+    // Remove the marker from the map
+    markers[markerId].setMap(null);
+
+    // Clear the event listener
+    google.maps.event.clearInstanceListeners(
+      markers[markerId]);
+
+    // Remove the reference to this marker instance
+    delete markers[markerId];
+};
+
+		

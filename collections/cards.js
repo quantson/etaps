@@ -26,11 +26,12 @@ validateCard = function (card) {
 
   if (!card.title)
     errors.title = "Please fill in a headline";
+
+  if (card.location === 'select')
+    errors.location = "Please select a location";
   
   if (card.location === 'custom')
-    errors.customLoc =  "Please fill in a custom location";
-
-  //todo: add error for customLoc
+    errors.customLoc = "Please fill in a custom location";
 
   return errors;
 };

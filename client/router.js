@@ -8,7 +8,8 @@ Router.onBeforeAction('loading');
 Router.route('/', {
 	name: 'home',
 	yieldRegions: {
-		'feedAddNew': {to: 'feedTop'}
+		'feedAddNew': {to: 'feedTop'},
+		'cards': {to: 'feedBody'}
 	}
 });
 
@@ -18,16 +19,17 @@ Router.route('/etaps/new', {
 		'cardCreate': {to: 'feedTop'}
 	},
 	onBeforeAction: function () {
-		var newMarkers = Markers.find({type: 'addNew'}).count();
-		if (newMarkers > 1) {
-			Meteor.call('removeMarker');
-			Router.go('home');
-		} else if (newMarkers === 1) {
+		if (Session.get('newMarker'))
 			this.next();
-		}
+		else
+			Router.go('home');
+	}
+});
 
-	},
-	waitOn: function () {
-		return Meteor.subscribe('newMarkers');
+Router.route('/quentin', {
+	name: 'profile',
+	yieldRegions: {
+		'profile': {to: 'feedTop'},
+		'cards': {to: 'feedBody'}
 	}
 });

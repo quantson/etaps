@@ -20,12 +20,13 @@
           <label class="col-md-4 control-label" for="location">Location</label>
           <div class="col-md-7">
             <select name="location" class="form-control location">
-              <option disabled selected>Select a location</option>
+              <option disabled selected value="select">Select a location</option>
               {{#each locations}}
                 <option value="{{this}}">{{this}}</option>
               {{/each}}
               <option id="customLoc" value="custom">Custom location</option>
             </select>
+            <span class="help-block">{{errorMessage 'location'}}</span>
           </div>
         </div>
 

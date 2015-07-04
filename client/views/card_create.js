@@ -10,7 +10,8 @@ Template.cardCreate.helpers({
     return !!Session.get('cardCreateErrors')[field] ? 'has-error' : '';
   },
   locations: function () {
-    return Markers.findOne() && Markers.findOne().reverse_geo;
+    //todo: add flash effect on change
+    return Session.get('newMarker') && Session.get('newMarker').reverse_geo;
   }
 });
 
@@ -33,7 +34,7 @@ Template.cardCreate.events({
     };
     
     var errors = validateCard(card);
-    if (errors.title || errors.url)
+    if (errors)
       return Session.set('cardCreateErrors', errors);
     
     Meteor.call('cardInsert', card, function(error, result) {
@@ -52,5 +53,6 @@ Template.cardCreate.events({
 });
 
 Template.cardCreate.onDestroyed( function () {
-  Meteor.call('removeMarker');
+  unpin(Session.get('newMarker').id);
+  Session.set('newMarker', null);
 });

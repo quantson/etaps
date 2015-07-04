@@ -67,6 +67,7 @@ html, body{
  	position: absolute;
  	top: 0;
  	bottom: 0;
+ 	width: 100%;
  	direction: rtl;
  	*{
  		direction: ltr;
@@ -266,6 +267,69 @@ html, body{
 	}
 }
 
+.profile {
+	.feed-template;
+	.clearfix();
+
+	.profile-top{
+		padding: 5px 5px;
+		
+		.profile-top_image {
+			display: inline-block;
+			height: 100%;
+			margin: 5px 5px;
+			
+			img{
+				height: 70px;
+			}
+		}
+
+		.profile-name{
+			display: inline-block;
+			
+			.profile-position{
+				color: #333;
+				font: italic;
+				font-size: 12px;
+			}
+
+			.glyphicon{
+				color: #333;
+				font-size: 12px;
+				margin-right: 5px;
+			}
+		}
+	}
+
+	.profile-nav{
+		text-align: center;
+		user-select: none;
+		.clearfix();
+		cursor: default;
+
+		.tab {
+			border-bottom: 0 solid;
+			-webkit-user-select: none; 
+		
+			&.active{
+				border-bottom-width: 4px; 
+				border-color: #333;
+			}
+
+			&:hover{
+				border-bottom-width: 4px; 
+				border-color: #333;
+			}
+
+			.number{
+				font-weight: bold;
+			}
+		}
+
+
+	}
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -318,4 +382,15 @@ html, body{
 .bounce {
   -webkit-animation: bounce 2s infinite;
   animation: bounce 2s infinite;
+}
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
 }

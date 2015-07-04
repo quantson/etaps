@@ -1,17 +1,7 @@
 <template name="feed">
 	<div class="feed-wrapper">
 		{{> yield 'feedTop'}}
-		<div class="cards">
-			<div class="card">
-				{{> card}}
-			</div>
-			<div class="card">
-				{{> card}}
-			</div>
-			<div class="card">
-				{{> card}}
-			</div>
-		</div>
+		{{> yield 'feedBody'}}
 	</div>	
 </template>
 
@@ -38,4 +28,18 @@
 			</a>
 		</div>
 	</div>
+</template>
+
+<template name="cards">
+	<div class="cards">
+			<div class="card">
+				{{> card}}
+			</div>
+			<div class="card">
+				{{> card}}
+			</div>
+			<div class="card">
+				{{> card}}
+			</div>
+		</div>
 </template>
