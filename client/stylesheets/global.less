@@ -78,8 +78,8 @@ html, body{
 	background: white;
 	border-radius: 2px;
   box-shadow: @shadow;
-  margin: 10px 2% 10px 1%;
-  width: 97%;
+  margin: 8px 2%;
+  width: 96%;
 }
 
 .feed-add-new {
@@ -168,19 +168,30 @@ html, body{
 }
 
 .cards{
-	margin: 0;
-	width: 100%;
-
+	.clearfix();
+	width: 96%;
+	margin: 0 2%;
+	
+	/*style new lines*/
 	hr{
 		margin: 5px 0;
 	}
 }
 
+.grid-sizer, .grid-item{
+	width: 49%;
+	margin-bottom: 8px;
+}
+
+.gutter-sizer {
+	width: 2%;
+ }
+
 .card{
-	display: inline-block;
-	.feed-template;
-	width: 47%;
-	margin: 10px 0 10px 2%;
+	float: left;
+	background: white;
+	border-radius: 2px;
+  box-shadow: @shadow;
 	font-size: 11px;
 	
 	.card-holder_content{

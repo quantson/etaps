@@ -31,15 +31,13 @@
 </template>
 
 <template name="cards">
-	<div class="cards">
-			<div class="card">
+	<div class="cards grid">
+		<div class="grid-sizer"></div>
+		<div class="gutter-sizer"></div>
+		{{#each cards}}	
+			<div class="card grid-item">
 				{{> card}}
 			</div>
-			<div class="card">
-				{{> card}}
-			</div>
-			<div class="card">
-				{{> card}}
-			</div>
-		</div>
+		{{/each}}	
+	</div>
 </template>

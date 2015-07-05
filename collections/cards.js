@@ -27,7 +27,7 @@ Meteor.methods({
 		var card = _.extend(cardAttributes, {
 			userId: user._id,
 			author: user.username,
-			submitted: new Date(),
+			submitted: moment(),
 			likers: [],
 			likes: 0
 		});

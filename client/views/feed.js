@@ -1,4 +1,5 @@
 drag = false;
+
 Template.feedAddNew.events({
 	'dragstart .draggable': function (e) {
 		e.target.style.opacity = '0.4';
@@ -17,5 +18,11 @@ Template.feedAddNew.events({
 		setTimeout(function () {
 			$('#pin').removeClass('bounce');
 		}, 2000);
+	}
+});
+
+Template.cards.helpers({
+	'cards': function () {
+		return Cards.find();
 	}
 });

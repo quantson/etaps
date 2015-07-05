@@ -2,7 +2,6 @@ Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	loadingTemplate: 'loading',
 	waitOn: function () {
-		console.log('Iron router start');
 		return Meteor.subscribe('users');
 	}
 });
@@ -14,6 +13,11 @@ Router.route('/', {
 	yieldRegions: {
 		'feedAddNew': {to: 'feedTop'},
 		'cards': {to: 'feedBody'}
+	},
+	waitOn: function () {
+		var userId = Meteor.users.findOne() && Meteor.users.findOne()._id;
+			if (userId)
+				return Meteor.subscribe('userCards', userId);
 	}
 });
 

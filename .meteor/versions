@@ -50,9 +50,11 @@ meteortoys:toykit@0.8.1
 minifiers@1.1.5
 minimongo@1.0.8
 mobile-status-bar@1.0.3
+momentjs:moment@2.10.3
 mongo@1.1.0
 msavin:mongol@1.0.98
 npm-bcrypt@0.7.8_2
+npm-container@1.0.0
 observe-sequence@1.0.6
 ordered-dict@1.0.3
 random@1.0.3
@@ -65,6 +67,7 @@ sacha:spin@2.3.1
 service-configuration@1.0.4
 session@1.1.0
 sha@1.0.3
+sjors:meteor-masonry@0.0.1
 spacebars@1.0.6
 spacebars-compiler@1.0.6
 srp@1.0.3

@@ -6,23 +6,23 @@
 			</a>
 		</div>	
 		<div class="card-holder_content">
-			<span><b>Quentin Maurice</b> with Julien Gusman and 3 others.</span><br>
-			<span class="time-elapsed">3 hours ago</span>
+			<span><a href="{{pathFor 'profile' username=this.author}}"><b>{{author}}</b></a> with Julien Gusman and 3 others.</span><br>
+			<span class="time-elapsed">{{fromNow}}</span>
 		</div>	
 	</div>
 	<hr>
 	<div class="card-info">
 		<div class="card-title">
-			<span>Chilling in Chile</span>
+			<span>{{title}}</span>
 		</div>
 		<div class="card-position">
-			<span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span>Parque nacional torres del Paine, Chile</span>
+			<span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span>{{location}}</span>
 		</div>
 	</div>
 	<hr>
 	<div class="card-body">
 		<div class="card-body_text">
-			<span>Best trip ever with my buddies Gusman, Nissou, Santi, Valol51 and Serge</span>
+			<span>{{description}}</span>
 		</div>
 		<div class="card-body_image"></div>
 	</div>
