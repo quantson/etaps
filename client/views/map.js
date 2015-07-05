@@ -40,11 +40,10 @@ Template.map.onCreated(function () {
 		//initialize global marker list in object
 		markers = {};
 
-		//initialize new Etap marker function
+		//initialize new Etap marker function and repeat when newEtap Session is changed
 		Tracker.autorun(function () {
 			//only pin if current path is newEtap
 			if (Router.current().route.path(this) === '/etaps/new') {
-				console.log('in');
 				pinNewEtap(map);
 			}
 		});

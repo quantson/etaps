@@ -32,21 +32,17 @@ Template.cardCreate.events({
       location: $(e.target).find('[name=customLoc]').val() || $(e.target).find('[name=location]').val(),
       // file: $(e.target).find('[name=title]').val(),
     };
-    
+
     var errors = validateCard(card);
-    if (errors)
+    if (!_.isEmpty(errors))
       return Session.set('cardCreateErrors', errors);
     
     Meteor.call('cardInsert', card, function(error, result) {
       // display the error to the user and abort
       if (error)
-        return throwError(error.reason);
-      
-      // show this result but route anyway
-      if (result.postExists)
-        throwError('This link has already been posted');
-      
-      // Router.go('postPage', {_id: result._id});  
+        return sAlert.error(error.reason);
+
+      Router.go('home');  
     });
   }
 

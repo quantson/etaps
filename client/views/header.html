@@ -19,11 +19,34 @@
 				{{#unless currentUser}}
           {{> loginButtons}}
 		    {{else}}
+		    	<li>
+		    		<a href="{{pathFor 'profile' username=username}}" class="profile-page">
+		    			{{username}}	
+		    		</a>
+		    	</li>
 		    	<li class="dropdown">
             {{> notifications}}
           </li>
+		    	<li class="dropdown">	
+		    		{{> loggedInButton}}
+		    	</li>	
 		    {{/unless}}  
       </ul>
   	</div>
 	</nav>
+</template>
+
+<template name="loggedInButton">
+	{{#if loggingIn}}
+		<a>Logging in...</a>
+	{{else}}
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			<span class="glyphicon glyphicon-cog"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<li>
+				<a id="logout">Logout</a>
+			</li>
+		</ul>
+	{{/if}}
 </template>

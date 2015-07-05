@@ -1,7 +1,26 @@
 Cards = new Mongo.Collection('cards');
 
+validateCard = function (card) {
+  var errors = {};
+
+  if (!card.title)
+    errors.title = "Please fill in a headline";
+
+  if (!card.location)
+    errors.location = "Please select a location";
+  
+  if (card.location === 'custom')
+    errors.customLoc = "Please fill in a custom location";
+
+  return errors;
+};
+
 Meteor.methods({
 	cardInsert: function (cardAttributes) {
+
+		var errors = validateCard(cardAttributes);
+    if (!_.isEmpty(errors))
+      throw new Meteor.Error('invalid-post', "You must set a title and location for your post");
 
 		//Server side checks
 		var user = Meteor.user();
@@ -13,25 +32,6 @@ Meteor.methods({
 			likes: 0
 		});
 
-		var cardId = Cards.insert(card);
-
-		return {
-			_id: cardId
-		};
+		return Cards.insert(card);
 	}
 });
-
-validateCard = function (card) {
-  var errors = {};
-
-  if (!card.title)
-    errors.title = "Please fill in a headline";
-
-  if (card.location === 'select')
-    errors.location = "Please select a location";
-  
-  if (card.location === 'custom')
-    errors.customLoc = "Please fill in a custom location";
-
-  return errors;
-};
