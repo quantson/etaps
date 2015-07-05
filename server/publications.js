@@ -5,3 +5,7 @@ Meteor.publish('users', function () {
 Meteor.publish('userCards', function (userId) {
 	return Cards.find({userId: userId});
 });
+
+Meteor.publish('avatars', function () {
+	return Avatars.find();
+});

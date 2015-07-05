@@ -21,5 +21,9 @@ juliancwirko:s-alert-scale
 momentjs:moment
 
 
-npm-container
 sjors:meteor-masonry
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem
+cfs:s3
+meteorhacks:npm

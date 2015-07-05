@@ -2,7 +2,7 @@ Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	loadingTemplate: 'loading',
 	waitOn: function () {
-		return Meteor.subscribe('users');
+		return [Meteor.subscribe('users'), Meteor.subscribe('avatars')];
 	}
 });
 
