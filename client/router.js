@@ -38,7 +38,7 @@ Router.route('/etaps/new', {
 Router.route('/:username', {
 	name: 'profile',
 	data: function () {
-		// return Meteor.users.findOne({username: this.params})._id;
+		return Meteor.users.findOne({username: this.params.username});
 	},
 	yieldRegions: {
 		'profile': {to: 'feedTop'},

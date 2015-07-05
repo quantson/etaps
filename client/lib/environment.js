@@ -1,1 +1,1 @@
-Markers = new Mongo.Collection(null);
+FS.debug = true;
