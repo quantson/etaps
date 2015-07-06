@@ -15,9 +15,7 @@ Router.route('/', {
 		'cards': {to: 'feedBody'}
 	},
 	waitOn: function () {
-		var userId = Meteor.users.findOne() && Meteor.users.findOne()._id;
-			if (userId)
-				return Meteor.subscribe('userCards', userId);
+		return Meteor.subscribe('cards');
 	}
 });
 

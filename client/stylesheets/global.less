@@ -36,6 +36,14 @@ html, body{
 			height: 30px;
 		}
 	}
+
+	.header-avatar{
+		width: 25px;
+		height: 25px;
+		.rounded-image;
+		position: relative;
+		top: -7px;
+	}
 }
 
 @header: 43px;
@@ -205,15 +213,10 @@ html, body{
 		}
 	}
 	
-	.card-holder_image { 
-		display: inline-block;
-		height: 100%;
-		float: left;
-		margin: 5px 5px;
-		
-		img{
-			height: 30px;
-		}
+	.card-owner_avatar { 
+		height: 30px;
+		width: 30px;
+		.rounded-image;
 	}
 
 	.card-info {
@@ -284,16 +287,14 @@ html, body{
 
 	.profile-top{
 		padding: 5px 5px;
+		.clearfix();
 		
 		.profile-top_image {
-			display: inline-block;
-			height: 100%;
-			margin: 5px 5px;
-			
-			img{
-				height: 70px;
-			}
+			height: 70px;
+			width: 70px;
+	    .rounded-image;
 		}
+			
 
 		.profile-name{
 			display: inline-block;
@@ -339,6 +340,16 @@ html, body{
 
 
 	}
+}
+
+.rounded-image{
+	display: inline-block;
+	float: left;
+	margin: 5px 5px;
+	background-repeat   : no-repeat;
+  background-position : 50%;
+  background-size     : auto 100%;
+  border-radius       : 50%;
 }
 
 ::-webkit-scrollbar {

@@ -1,10 +1,8 @@
 <template name="card">
 	<div class="card-holder">
-		<div class="card-holder_image">
-			<a href="#">
-				<img src="/pp.png" alt="Quentin">
-			</a>
-		</div>	
+		<a href="{{pathFor 'profile' username=this.author}}">
+			<div class="card-owner_avatar" style='background-image: url({{avatarUrl}})'></div>	
+		</a>
 		<div class="card-holder_content">
 			<span><a href="{{pathFor 'profile' username=this.author}}"><b>{{author}}</b></a> with Julien Gusman and 3 others.</span><br>
 			<span class="time-elapsed">{{fromNow}}</span>

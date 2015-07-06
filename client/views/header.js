@@ -1,6 +1,13 @@
 Template.header.helpers({
 	'username': function () {
 		return Meteor.user().username;
+	},
+	'avatarUrl': function () {
+		if (!!Meteor.user() && !!Avatars.findOne(Meteor.user().profile.avatarId)) {
+      return Avatars.findOne(Meteor.user().profile.avatarId).url();
+    } else {
+      return '/default-avatar.png';
+    }
 	}
 });
 

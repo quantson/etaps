@@ -11,5 +11,17 @@ Template.card.onRendered(function () {
 Template.card.helpers({
 	'fromNow': function () {
 		return moment(this.submitted).fromNow();
+	},
+	'avatarUrl': function () {
+		var cardOwner = Meteor.users.findOne(this.userId), avatarId;
+		if (!!cardOwner) {
+			avatarId = cardOwner.profile.avatarId;
+		}
+
+		if (!!avatarId) {
+      return Avatars.findOne(avatarId).url();
+    } else {
+      return '/default-avatar.png';
+    }
 	}
 });
