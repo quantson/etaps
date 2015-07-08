@@ -1,7 +1,7 @@
 <template name="card">
 	<div class="card-holder">
 		<a href="{{pathFor 'profile' username=this.author}}">
-			<div class="card-owner_avatar" style='background-image: url({{avatarUrl}})'></div>	
+			<div class="card-owner_avatar" style='background-image: url({{avatarThumbUrl}})'></div>	
 		</a>
 		<div class="card-holder_content">
 			<span><a href="{{pathFor 'profile' username=this.author}}"><b>{{author}}</b></a> with Julien Gusman and 3 others.</span><br>

@@ -1,7 +1,7 @@
-var avatarStore = new FS.Store.GridFS("avatars");
+var avatarThumbStore = new FS.Store.GridFS("avatarThumbStore");
 
-Avatars = new FS.Collection("avatars", {
-	stores: [avatarStore],
+AvatarThumbs = new FS.Collection("avatarThumbs", {
+	stores: [avatarThumbStore],
   filter: {
     allow: {
       contentTypes: ['image/*'] //allow only images in this FS.Collection
@@ -9,7 +9,7 @@ Avatars = new FS.Collection("avatars", {
   }
 });
 
-Avatars.deny({
+AvatarThumbs.deny({
 	insert: function(){
 		return false;
 	},
@@ -24,7 +24,7 @@ Avatars.deny({
 	}
 });
 
-Avatars.allow({
+AvatarThumbs.allow({
 	insert: function(userId, doc) {
 		return true;
 	},

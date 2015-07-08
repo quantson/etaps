@@ -13,3 +13,7 @@ Meteor.publish('cards', function () {
 Meteor.publish('avatars', function () {
 	return Avatars.find();
 });
+
+Meteor.publish('avatarThumbs', function () {
+	return AvatarThumbs.find();
+});

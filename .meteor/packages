@@ -27,3 +27,6 @@ cfs:gridfs
 cfs:filesystem
 cfs:s3
 meteorhacks:npm
+cfs:ui
+reactive-var
+jonblum:jquery-cropper

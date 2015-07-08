@@ -2,7 +2,7 @@ Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	loadingTemplate: 'loading',
 	waitOn: function () {
-		return [Meteor.subscribe('users'), Meteor.subscribe('avatars')];
+		return [Meteor.subscribe('users'), Meteor.subscribe('avatars'), Meteor.subscribe('avatarThumbs')];
 	}
 });
 
@@ -40,7 +40,8 @@ Router.route('/:username', {
 	},
 	yieldRegions: {
 		'profile': {to: 'feedTop'},
-		'cards': {to: 'feedBody'}
+		'cards': {to: 'feedBody'},
+		'avatarModal': {to: 'modal'}
 	},
 	waitOn: function () {
 		//wait for users to be loaded

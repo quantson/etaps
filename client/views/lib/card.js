@@ -12,14 +12,16 @@ Template.card.helpers({
 	'fromNow': function () {
 		return moment(this.submitted).fromNow();
 	},
-	'avatarUrl': function () {
-		var cardOwner = Meteor.users.findOne(this.userId), avatarId;
+	'avatarThumbUrl': function () {
+		var cardOwner = Meteor.users.findOne(this.userId), thumbId;
+		//get avatarThumb _id from card owner
 		if (!!cardOwner) {
-			avatarId = cardOwner.profile.avatarId;
+			thumbId = cardOwner.profile.avatarThumbId;
 		}
-
-		if (!!avatarId) {
-      return Avatars.findOne(avatarId).url();
+		console.log(thumbId);
+		//get thumb url or return default
+		if (!!thumbId) {
+      return AvatarThumbs.findOne(thumbId).url();
     } else {
       return '/default-avatar.png';
     }
