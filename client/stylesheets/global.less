@@ -70,7 +70,7 @@ html, body{
 
 .feed-wrapper{
 	margin-top: @header;
- 	overflow-y: auto;
+ 	overflow-y: scroll;
  	overflow-x: hidden; 
  	position: absolute;
  	top: 0;
@@ -186,7 +186,11 @@ html, body{
 	}
 }
 
-.grid-sizer, .grid-item{
+.grid-sizer{
+	width: 49%;
+}
+
+.grid-item{
 	width: 49%;
 	margin-bottom: 8px;
 }
@@ -311,6 +315,21 @@ html, body{
 				margin-right: 5px;
 			}
 		}
+
+		.uploading {
+	    -webkit-animation-name: rotate; 
+	    -webkit-animation-duration: 2s; 
+	    -webkit-animation-iteration-count: infinite;
+	    -webkit-animation-timing-function: linear;
+	    -moz-animation-name: rotate; 
+	    -moz-animation-duration: 2s; 
+	    -moz-animation-iteration-count: infinite;
+	    -moz-animation-timing-function: linear;
+	    animation-name: rotate; 
+	    animation-duration: 2s; 
+	    animation-iteration-count: infinite;
+	    animation-timing-function: linear;
+		}
 	}
 
 	.profile-nav{
@@ -347,7 +366,7 @@ html, body{
 		width: 500px;
 		height: 300px;
 	}
-	
+
 	.crop-action {
 		margin-top: 10px;
 	}
@@ -424,6 +443,21 @@ html, body{
 	60% {
   	transform: translateY(-5px);
 	}
+}
+
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }
 
 .bounce {

@@ -6,8 +6,6 @@ Router.configure({
 	}
 });
 
-Router.onBeforeAction('loading');
-
 Router.route('/', {
 	name: 'home',
 	yieldRegions: {
@@ -15,7 +13,7 @@ Router.route('/', {
 		'cards': {to: 'feedBody'}
 	},
 	waitOn: function () {
-		return Meteor.subscribe('cards');
+		return Meteor.subscribe('cards', {sort: {submitted: -1, _id: -1}});
 	}
 });
 

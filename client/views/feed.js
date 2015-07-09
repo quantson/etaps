@@ -26,3 +26,7 @@ Template.cards.helpers({
 		return Cards.find();
 	}
 });
+
+Template.cards.onRendered(function () {
+	// $('.grid').masonry('reloadItems');
+});

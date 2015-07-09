@@ -1,4 +1,4 @@
-Template.changeAvatar.events({
+Template.avatarChange.events({
 
   'change #inputImage': function(event, template) {
     var $inputImage = $('#inputImage'),
@@ -38,7 +38,6 @@ Template.avatarModal.events({
 
   'hidden.bs.modal': function () {
 	  $('#crop').cropper('destroy');
-	  $('#submitCrop').text('Save and upload').prop('disabled', false);
 	},
 
 	'click .crop-action>.btn': function (e) {
@@ -47,7 +46,8 @@ Template.avatarModal.events({
 	},
 
 	'click #submitCrop': function () {
-		$('#submitCrop').text('Uploading...').prop('disabled', true);
+		$('.upload-txt').text(' Uploading...').prop('disabled', true);
+    $('.glyphicon-upload').removeClass('glyphicon-upload').addClass('glyphicon-cog uploading');
 
 		//Create a canvas for avatar and thumb and get dataURL
 		var avatarThumbURL = $('#crop').cropper('getCroppedCanvas', {
@@ -59,8 +59,10 @@ Template.avatarModal.events({
 			heigt: 300
 		}).toDataURL();
 
-		console.log(avatarThumbURL);
-		var thumbId;
+    //Hide Canvas
+    $('#avatar-crop-modal').modal('toggle');
+
+		var thumbId, avatarThumbId, avatarId;
 		//upload avatar and thumb to respective collections
     AvatarThumbs.insert(avatarThumbURL, function (error, thumb) {
     	thumbId = thumb._id;
@@ -68,16 +70,11 @@ Template.avatarModal.events({
       if (error)
           sAlert.error(error.reason);
       else { 
-        //remove old avatarThumb and set new one
+        //set avatarThumbId for replacement
         var userId = Meteor.userId();
-        if (Meteor.users.findOne(userId).profile.avatarThumb) {
-          formerAvatarThumbId = Meteor.users.findOne(userId).profile.avatarThumbId;
-          AvatarThumbs.remove(formerAvatarThumbId);
-        }
-        var avatarThumbId = {
+        avatarThumbId = {
           'profile.avatarThumbId': thumb._id
         };
-        Meteor.users.update(userId, {$set: avatarThumbId});
       }
     });
 
@@ -85,25 +82,33 @@ Template.avatarModal.events({
       if (error)
           sAlert.error(error.reason);
       else { 
-        //remove old avatar and set new one
-        var userId = Meteor.userId();
-        if (Meteor.users.findOne(userId).profile.avatarId) {
-          formerAvatarId = Meteor.users.findOne(userId).profile.avatarId;
-          Avatars.remove(formerAvatarId);
-        }
-        var avatarId = {
+        //set avatarId for replacement
+        avatarId = {
           'profile.avatarId': avatar._id
         };
-        Meteor.users.update(userId, {$set: avatarId});
       }
       avatar.thumb = thumbId;
 
-    	var cursor = Avatars.find(avatar._id);
-    	var liveQuery = cursor.observe({
-    		changed: function (newAvatar, oldAvatar) {
-    			if (newAvatar.isUploaded()) {
-    				liveQuery.stop();
-    				setTimeout(function () { $('#avatar-crop-modal').modal('toggle'); }, 1000);
+      var cursor = Avatars.find(avatar._id);
+      var liveQuery = cursor.observe({
+        changed: function (newAvatar, oldAvatar) {
+          if (newAvatar.isUploaded()) {
+            liveQuery.stop();
+          
+            //remove old avatar (if set) and set new one
+            if (Meteor.user().profile.avatarThumbId) {
+              formerAvatarThumbId = Meteor.user().profile.avatarThumbId;
+              AvatarThumbs.remove(formerAvatarThumbId);
+            }
+            Meteor.users.update(Meteor.userId(), {$set: avatarThumbId});
+            if (Meteor.user().profile.avatarId) {
+              formerAvatarId = Meteor.user().profile.avatarId;
+              Avatars.remove(formerAvatarId);
+            }
+            Meteor.users.update(Meteor.userId(), {$set: avatarId});
+
+    				$('.upload-txt').text(' Change picture').prop('disabled', true);
+            $('.uploading').removeClass('glyphicon-cog uploading').addClass('glyphicon-upload');
     			}
     		}
     	});
@@ -112,8 +117,8 @@ Template.avatarModal.events({
 
 });
 
-Template.avatarModal.helpers({
-	avatars: function () {
-		return Avatars.find();
-	}
-});
+// Template.avatarModal.helpers({
+// 	avatars: function () {
+// 		return Avatars.find();
+// 	}
+// });

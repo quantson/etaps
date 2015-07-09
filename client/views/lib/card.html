@@ -1,34 +1,36 @@
 <template name="card">
-	<div class="card-holder">
-		<a href="{{pathFor 'profile' username=this.author}}">
-			<div class="card-owner_avatar" style='background-image: url({{avatarThumbUrl}})'></div>	
-		</a>
-		<div class="card-holder_content">
-			<span><a href="{{pathFor 'profile' username=this.author}}"><b>{{author}}</b></a> with Julien Gusman and 3 others.</span><br>
-			<span class="time-elapsed">{{fromNow}}</span>
-		</div>	
-	</div>
-	<hr>
-	<div class="card-info">
-		<div class="card-title">
-			<span>{{title}}</span>
+	<div class="card grid-item" data-timestamp="{{timestamp}}">
+		<div class="card-holder">
+			<a href="{{pathFor 'profile' username=this.author}}">
+				<div class="card-owner_avatar" style='background-image: url({{avatarThumbUrl}})'></div>	
+			</a>
+			<div class="card-holder_content">
+				<span><a href="{{pathFor 'profile' username=this.author}}"><b>{{author}}</b></a> with Julien Gusman and 3 others.</span><br>
+				<span class="time-elapsed">{{fromNow}}</span>
+			</div>	
 		</div>
-		<div class="card-position">
-			<span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span>{{location}}</span>
+		<hr>
+		<div class="card-info">
+			<div class="card-title">
+				<span>{{title}}</span>
+			</div>
+			<div class="card-position">
+				<span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span>{{location}}</span>
+			</div>
 		</div>
-	</div>
-	<hr>
-	<div class="card-body">
-		<div class="card-body_text">
-			<span>{{description}}</span>
+		<hr>
+		<div class="card-body">
+			<div class="card-body_text">
+				<span>{{description}}</span>
+			</div>
+			<div class="card-body_image"></div>
 		</div>
-		<div class="card-body_image"></div>
-	</div>
-	<div class="card-interact">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="add comment">
+		<div class="card-interact">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="add comment">
+			</div>
+			<span class="glyphicon glyphicon-thumbs-up"></span>	
+			<span class="glyphicon glyphicon-ok"></span>	
 		</div>
-		<span class="glyphicon glyphicon-thumbs-up"></span>	
-		<span class="glyphicon glyphicon-ok"></span>	
-	</div>
+	</div>	
 </template>

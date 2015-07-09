@@ -21,7 +21,6 @@ juliancwirko:s-alert-scale
 momentjs:moment
 
 
-sjors:meteor-masonry
 cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
@@ -30,3 +29,4 @@ meteorhacks:npm
 cfs:ui
 reactive-var
 jonblum:jquery-cropper
+isotope:isotope
