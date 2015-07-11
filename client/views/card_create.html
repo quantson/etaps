@@ -48,17 +48,15 @@
         </div>
 
         <!-- File upload --> 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="file">Upload image</label>
-          <div class="col-md-7">
-            <input name="file" class="input-file" type="file">
-          </div>
-        </div>
+        {{> imageUpload}}
 
         <!-- Submit Button -->
         <div class="form-group">
           <div class="col-md-4 pull-right">
-            <input type="submit" name="submit" class="btn btn-success" value="Add etap !">
+            <label class="btn btn-success" for="submit" title="Create etap">
+              <input class="sr-only" id="submit" name="submit" type="submit">
+              <span class="glyphicon glyphicon-ok-circle"></span><span class="submit-card"> Add etap</span>
+            </label>
           </div>
         </div>
 

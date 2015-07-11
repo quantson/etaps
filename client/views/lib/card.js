@@ -50,6 +50,9 @@ Template.card.helpers({
     } else {
       return '/default-avatar.png';
     }
+	},
+	'cardImageUrl': function () {
+		return ImageThumbs.findOne(this.imageThumbId).url();
 	}
 
 });

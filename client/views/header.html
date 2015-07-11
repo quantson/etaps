@@ -19,7 +19,7 @@
 				{{#unless currentUser}}
           {{> loginButtons}}
 		    {{else}}
-		    	<li>
+		    	<li class="header-profile">
 		    		<a href="{{pathFor 'profile' username=username}}" class="profile-page">
 							<div class="header-avatar" style='background-image: url({{avatarUrl}})'></div>	
 		    			{{username}}	

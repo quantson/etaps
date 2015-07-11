@@ -2,7 +2,7 @@ Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	loadingTemplate: 'loading',
 	waitOn: function () {
-		return [Meteor.subscribe('users'), Meteor.subscribe('avatars'), Meteor.subscribe('avatarThumbs')];
+		return [Meteor.subscribe('users'), Meteor.subscribe('avatars'), Meteor.subscribe('avatarThumbs'), Meteor.subscribe('imageThumbs'),Meteor.subscribe('images')];
 	}
 });
 
@@ -20,7 +20,8 @@ Router.route('/', {
 Router.route('/etaps/new', {
 	name: 'new_etap',
 	yieldRegions: {
-		'cardCreate': {to: 'feedTop'}
+		'cardCreate': {to: 'feedTop'},
+		'imageModal': {to: 'modal'}
 	},
 	onBeforeAction: function () {
 		if (Session.get('newMarker'))

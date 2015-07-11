@@ -23,7 +23,9 @@
 			<div class="card-body_text">
 				<span>{{description}}</span>
 			</div>
-			<div class="card-body_image"></div>
+			{{#if this.imageThumbId}}
+				<div class="card-body_image" style='background-image: url({{cardImageUrl}});'></div>
+			{{/if}}
 		</div>
 		<div class="card-interact">
 			<div class="input-group">

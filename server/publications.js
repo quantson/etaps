@@ -17,3 +17,11 @@ Meteor.publish('avatars', function () {
 Meteor.publish('avatarThumbs', function () {
 	return AvatarThumbs.find();
 });
+
+Meteor.publish('images', function () {
+	return Images.find();
+});
+
+Meteor.publish('imageThumbs', function () {
+	return ImageThumbs.find();
+});
