@@ -142,7 +142,30 @@ html, body{
 		height: 60px;
 		margin: 5px auto;
 	}
+
+	.pinner {
+		height: 60px;
+		margin: 5px auto;
+	}
+
+	#pin {
+		height: 40px;
+		border-radius: 50%;
+		
+	}
 }
+
+.pinner::after {
+	content: '';
+	display: block;  
+	position: absolute;
+	top: 100px;
+	background: url('/arrow.png') center no-repeat;
+	background-size: contain;
+	width: 30px;
+	height: 16px;
+	left: 55px;
+}	
 
 .card-create {
 	.feed-template;
@@ -193,6 +216,10 @@ html, body{
 	hr{
 		margin: 5px 0;
 	}
+
+	.loading {
+		margin-top: 200px;
+	}
 }
 
 .grid-sizer{
@@ -230,6 +257,7 @@ html, body{
 		height: 30px;
 		width: 30px;
 		.rounded-image;
+		position: relative;
 	}
 
 	.card-info {
@@ -400,6 +428,31 @@ html, body{
 		min-height: 400px;
 		text-align: center;
 	}
+}
+
+#markerLayer img {
+  border: 1px solid !important;
+	border-radius: 20px;
+}
+
+#markerLayer > div {
+	overflow: visible !important;
+}
+
+#markerLayer > div:first-child {
+	overflow: hidden !important;
+}
+
+#markerLayer :after {
+	content: '';
+	display: block;  
+	position: absolute;
+	top: 100%;
+	background: url('/arrow.png') center no-repeat;
+	background-size: contain;
+	width: 25px;
+	height: 13px;
+	left: 3.3px;
 }
 
 .uploading {

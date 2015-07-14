@@ -24,7 +24,9 @@
 		<div class="col-md-4 pin_frame">
 			<a href="#">
 				<span class="feed-add-new_big" id="pin-me">pin me!</span>
-				<img class="draggable" id="pin" draggable="true" src="/pin.png">
+				<div draggable="true" class="pinner draggable">
+					<img  id="pin" draggable="true" src="{{pinUrl}}">
+				</div>	
 			</a>
 		</div>
 	</div>
@@ -34,8 +36,14 @@
 	<div class="cards grid">
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		{{#each cards}}	
-			{{> card}}
-		{{/each}}	
+		{{#if Template.subscriptionsReady}}
+			{{#each cards}}	
+				{{> card}}
+			{{/each}}	
+		{{else}}
+			<div class="loading">
+				{{> spinner}}
+			</div>
+		{{/if}}	
 	</div>
 </template>

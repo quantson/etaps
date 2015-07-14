@@ -1,21 +1,6 @@
-Template.cards.onRendered(function () {
-	$('.grid').isotope({
-	  // options
-  	
-  	getSortData: {
-    	timestamp: '[data-timestamp]',
-    },
-		sortBy: 'timestamp',
- 		sortAscending: false,
-
-	  itemSelector: '.grid-item',
-  	percentPosition: true,
-	  masonry: {
-	  columnWidth: '.grid-sizer',
-  	gutter: '.gutter-sizer'
-	  },
-
-	});
+Template.card.onCreated(function () {
+	var location = this.data.position;
+	Markers.insert({lat: location.A, lng: location.F, icon: cardThumbUrl(this.data)});
 });
 
 Template.card.onRendered(function () {
@@ -24,6 +9,10 @@ Template.card.onRendered(function () {
 
 Template.card.onDestroyed(function () {
 	$('.grid').isotope('remove', this.$(".grid-item")).isotope();
+	var location = this.data.position;
+	markerId = Markers.findOne({lat: location.A, lng: location.F});
+	if (markerId)
+		Markers.remove(markerId); 
 });
 
 
@@ -39,20 +28,24 @@ Template.card.helpers({
 	},
 
 	'avatarThumbUrl': function () {
-		var cardOwner = Meteor.users.findOne(this.userId), thumbId;
-		//get avatarThumb _id from card owner
-		if (!!cardOwner) {
-			thumbId = cardOwner.profile.avatarThumbId;
-		}
-		//get thumb url or return default
-		if (!!thumbId) {
-      return AvatarThumbs.findOne(thumbId).url();
-    } else {
-      return '/default-avatar.png';
-    }
+		return cardThumbUrl(this);
 	},
 	'cardImageUrl': function () {
 		return ImageThumbs.findOne(this.imageThumbId).url();
 	}
 
 });
+	
+cardThumbUrl = function (card) {
+	var cardOwner = Meteor.users.findOne(card.userId), thumbId;
+	//get avatarThumb _id from card owner
+	if (!!cardOwner) {
+		thumbId = cardOwner.profile.avatarThumbId;
+	}
+	//get thumb url or return default
+	if (!!thumbId) {
+    return AvatarThumbs.findOne(thumbId).url();
+  } else {
+    return '/default-avatar.png';
+  }
+};

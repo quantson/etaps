@@ -26,10 +26,12 @@ Template.cardCreate.events({
   'submit form': function(e) {
     e.preventDefault();
 
+    var markerEl = Session.get('newMarker');  
     var card = {
       title: $(e.target).find('[name=title]').val(),
       description: $(e.target).find('[name=description]').val(),
       location: $(e.target).find('[name=customLoc]').val() || $(e.target).find('[name=location]').val(),
+      position: new google.maps.LatLng(markerEl.lat, markerEl.lng),
     };
 
     var errors = validateCard(card);
@@ -90,6 +92,8 @@ Template.cardCreate.onDestroyed( function () {
   if (Session.get('newMarker'))
     unpin(Session.get('newMarker').id);
   Session.set('newMarker', null);
+  Session.set('cardImageThumb_upload', null);
+  Session.set('cardImage_upload', null);
 });
 
 insert = function (card) {

@@ -2,9 +2,11 @@ Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	loadingTemplate: 'loading',
 	waitOn: function () {
-		return [Meteor.subscribe('users'), Meteor.subscribe('avatars'), Meteor.subscribe('avatarThumbs'), Meteor.subscribe('imageThumbs'),Meteor.subscribe('images')];
-	}
+		return [Meteor.subscribe('avatars'), Meteor.subscribe('avatarThumbs'), Meteor.subscribe('imageThumbs'), Meteor.subscribe('images')];
+	}	
 });
+
+Router.onBeforeAction('loading');
 
 Router.route('/', {
 	name: 'home',
@@ -12,9 +14,6 @@ Router.route('/', {
 		'feedAddNew': {to: 'feedTop'},
 		'cards': {to: 'feedBody'}
 	},
-	waitOn: function () {
-		return Meteor.subscribe('cards', {sort: {submitted: -1, _id: -1}});
-	}
 });
 
 Router.route('/etaps/new', {
@@ -41,11 +40,5 @@ Router.route('/:username', {
 		'profile': {to: 'feedTop'},
 		'cards': {to: 'feedBody'},
 		'avatarModal': {to: 'modal'}
-	},
-	waitOn: function () {
-		//wait for users to be loaded
-		var userId = Meteor.users.findOne({'username': this.params.username}) && Meteor.users.findOne({'username': this.params.username})._id;
-		if (userId)
-			return Meteor.subscribe('userCards', userId);
 	}
 });

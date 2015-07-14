@@ -3,7 +3,7 @@ Template.map.helpers({
 		if (GoogleMaps.loaded()) {
 			return {
 				center: {lat: 0, lng: 0},
-				zoom: 4,
+				zoom: 2,
 				disableDefaultUI: true,
 				zoomControl: true,
          		zoomControlOptions: {
@@ -47,17 +47,28 @@ Template.map.onCreated(function () {
 				pinNewEtap(map);
 			}
 		});
-			
+
+		var myoverlay = new google.maps.OverlayView();
+  	myoverlay.draw = function () {
+	    //this assigns an id to the markerlayer Pane, so it can be referenced by CSS
+	    this.getPanes().markerLayer.id='markerLayer'; 
+	  };
+	  myoverlay.setMap(map);
+
 		//dburles reactive markers code
 		Markers.find().observe({  
 		  added: function(document) {
+
+		  	
+
 		    // Create a marker for this document
 		    var marker = new google.maps.Marker({
-		      draggable: true,
+		      draggable: false,
 		      animation: google.maps.Animation.DROP,
 		      position: new google.maps.LatLng(document.lat, document.lng),
 		      map: map,
-		      icon: '/pin_small.png',
+		      icon: pinImage(document.icon),
+		      optimized: false,
 		      // We store the document _id on the marker in order 
 		      // to update the document within the 'dragend' event below.
 		      id: document._id
@@ -72,6 +83,7 @@ Template.map.onCreated(function () {
 
 		    // Store this marker instance within the markers object.
 		    markers[document._id] = marker;
+				
 		  },
 		  changed: function(newDocument, oldDocument) {
 		    markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
@@ -133,6 +145,19 @@ getNewCenter = function (map) {
 		return new google.maps.LatLng(map.getCenter().lat(), newLng);
 };
 
+pinImage = function (url) {
+	return {
+		url: url,
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(30, 30),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(15, 44),
+    scaledSize: new google.maps.Size(30, 30),
+  };
+};
+
 //return a callback function with argument an array of geo-names of the position
 reverseGeocode = function (position, callback) {
 	
@@ -154,13 +179,15 @@ reverseGeocode = function (position, callback) {
 
 pinNewEtap = function (map) {
 	var markerEl = Session.get('newMarker');
+	//don't pin when we move marker on the map
+  
   if (markerEl && !markerEl.changed) {
 	  var marker = new google.maps.Marker({
 	    draggable: true,
 	    animation: google.maps.Animation.DROP,
 	    position: new google.maps.LatLng(markerEl.lat, markerEl.lng),
 	    map: map,
-	    icon: '/pin_small.png'
+	    icon: pinImage(AvatarThumbs.findOne(Meteor.user().profile.avatarThumbId).url())
 	  });
 
 	  // This listener lets us drag markers on the map and update their corresponding document.

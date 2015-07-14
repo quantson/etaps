@@ -12,3 +12,7 @@ Meteor.startup(function () {
   });
 
 });
+
+Meteor.Spinner.options = {
+    top: 2000 // Top position relative to parent in px
+};
