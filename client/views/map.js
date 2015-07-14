@@ -181,13 +181,15 @@ pinNewEtap = function (map) {
 	var markerEl = Session.get('newMarker');
 	//don't pin when we move marker on the map
   
+  var iconUrl = !!Meteor.user().profile.avatarThumbId ? AvatarThumbs.findOne(Meteor.user().profile.avatarThumbId).url() : '/default-avatar.png';
+
   if (markerEl && !markerEl.changed) {
 	  var marker = new google.maps.Marker({
 	    draggable: true,
 	    animation: google.maps.Animation.DROP,
 	    position: new google.maps.LatLng(markerEl.lat, markerEl.lng),
 	    map: map,
-	    icon: pinImage(AvatarThumbs.findOne(Meteor.user().profile.avatarThumbId).url())
+	    icon: pinImage(iconUrl)
 	  });
 
 	  // This listener lets us drag markers on the map and update their corresponding document.
